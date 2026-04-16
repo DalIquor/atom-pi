@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SHA‑256 Full Pipeline Demo</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #181a1f;
+      color: #e6e6e6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 720px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #23252b;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.45);
+    }
+    h1 {
+      margin: 0;
+      font-weight: 600;
+      text-align: center;
+      color: #fafafa;
+    }
+    textarea {
+      width: 100%;
+      padding: 12px;
+      background: #1a1c21;
+      border: 1px solid #3a3d44;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 15px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: #4ac;
+      border: none;
+      border-radius: 6px;
+      font-size: 17px;
+      color: #000;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    pre {
+      background: #1a1c21;
+      border: 1px solid #3a3d44;
+      color: #e6e6e6;
+      padding: 14px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>SHA‑256 Full Pipeline</h1>
+
+  <textarea id="msg" placeholder="Enter message..."></textarea>
+  <button onclick="runFull()">Compute SHA‑256</button>
+
+  <pre id="out"></pre>
+</div>
+
+<script src="./substrate/atom-pi.js"></script>
+<script src="./wrapper/sha256.js"></script>
+<script src="./wrapper/sha256_block.js"></script>
+<script src="./wrapper/sha256_hex.js"></script>
+<script src="./glue/ux_full.js"></script>
+<script>console.log(document.getElementById("out").childNodes);</script>
+</body>
+</html>

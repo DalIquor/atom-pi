@@ -1,0 +1,133 @@
+.TH ATOM-PI 1 "2026-04-14" "Atom‑PI Substrate" "User Commands"
+.SH NAME
+atom-pi \- invariant primitives for symmetric cryptography
+
+.SH SYNOPSIS
+.B atom-pi
+.RI [ operation ]
+.RI [ options ]
+
+.SH DESCRIPTION
+Atom‑PI is a deterministic, zero‑magic substrate exposing the minimal
+set of operations required to construct symmetric cryptographic
+primitives.
+
+It does not implement any named algorithms.  It provides only the
+fundamental atoms from which such algorithms can be built:
+ARX operations, boolean S‑boxes, byte S‑boxes, linear diffusion,
+GF(2^8) and GF(2^128) arithmetic, structural combinators, and
+deterministic memory models.
+
+Atom‑PI is intended for designing and experimenting with new
+constructions, not for re‑branding existing standardized ciphers
+and hashes.
+
+.SH PHILOSOPHY
+Atom‑PI enforces the following design principles:
+
+.IP \(bu 3
+Every transformation is explicit.
+.IP \(bu 3
+Every state transition is visible.
+.IP \(bu 3
+No hidden dependencies or helpers.
+.IP \(bu 3
+Deterministic, pure, side‑effect‑free atoms.
+.IP \(bu 3
+Strict 32‑bit and 8‑bit invariants at boundaries.
+.IP \(bu 3
+Wrappers define structure; Atom‑PI defines atoms.
+
+.SH ATOMS
+The substrate is divided into five categories.
+
+.SS Arithmetic / Bit Atoms
+.TP
+.B wadd(a, b)
+32‑bit modular addition.
+.TP
+.B wxor(a, b)
+32‑bit XOR.
+.TP
+.B wrot(x, n)
+32‑bit rotate‑left.
+.TP
+.B wshr(x, n)
+Logical right shift.
+
+.SS Nonlinear Atoms
+.TP
+.B sbox_boolean(a, b, c, mode)
+Boolean S‑box ("ch", "maj").
+.TP
+.B sbox_byte(x, table)
+Byte‑level S‑box using a caller‑supplied table.
+
+.SS Linear‑Mixing Atoms
+.TP
+.B lmix_word(w0, w1, w2, w3)
+Generic linear word mixer.
+.TP
+.B lmix_perm(state, perm)
+Fixed permutation of state words.
+.TP
+.B lmix_gf256(column)
+4‑byte GF(2^8) column mixer.
+.TP
+.B lmix_quarterround(a, b, c, d)
+ARX quarter‑round.
+.TP
+.B gf_mul(a, b)
+Multiplication in GF(2^128).
+
+.SS Structural Atoms
+.TP
+.B compress(state, block, round_fn, rounds)
+Generic compression loop.
+.TP
+.B expand(message, schedule_fn, count)
+Generic schedule/key expansion.
+.TP
+.B feedback(state, next)
+XOR‑based chaining feedback.
+.TP
+.B feedback_indexed(state, memory, index)
+Memory‑indexed feedback.
+
+.SS Memory Atoms
+.TP
+.B state_small(n)
+Allocate fixed‑size word state.
+.TP
+.B state_large(n)
+Allocate large memory region.
+
+.SH NOT IMPLEMENTED
+Atom‑PI intentionally does not implement any named cryptographic
+primitive.  There is no built‑in SHA‑256, AES, ChaCha, GHASH,
+HMAC, KDF, or stream cipher.
+
+All such constructions, standardized or experimental, must be
+implemented as separate wrappers that compose Atom‑PI atoms.
+
+.SH EXAMPLES
+Typical uses of Atom‑PI include:
+
+.IP \(bu 3
+Designing new hash functions from ARX and boolean S‑boxes.
+.IP \(bu 3
+Experimenting with custom block ciphers and permutations.
+.IP \(bu 3
+Building educational demos of "good vs bad" crypto pipelines.
+.IP \(bu 3
+Prototyping memory‑hard constructions using feedback_indexed()
+and state_large().
+
+Atom‑PI itself performs no hashing, encryption, or key derivation.
+
+.SH FILES
+.I atom-pi.js
+The substrate implementation.
+
+.SH AUTHOR
+SAL.
