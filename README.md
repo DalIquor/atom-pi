@@ -1,8 +1,11 @@
 # ATOM‑PI
-Deterministic, Transparent, Zero‑Magic Primitives for Symmetric Cryptography
+
+## Deterministic, Transparent, Zero‑Magic Primitives for Symmetric Cryptography
+
 Atom‑PI is a cryptographic substrate — a minimal set of invariant, explicit, fully‑visible operations from which modern symmetric algorithms can be constructed.
 
 It is not a crypto library.
+
 It does not implement SHA‑256, AES, ChaCha, PBKDF2, or any named primitive.
 
 Instead, Atom‑PI exposes the atoms those algorithms are built from:
@@ -75,19 +78,19 @@ This makes Atom‑PI ideal for:
 
 ## Design Principles
 
-1. Determinism
+### 1. Determinism
 
 Every atom is pure.
 
 No randomness. No hidden state. No side effects.
 
-2. Transparency
+### 2. Transparency
 
 Every transformation is explicit.
 
 No helpers. No shortcuts. No magic.
 
-3. Invariant Boundaries
+### 3. Invariant Boundaries
 
 All atoms enforce:
 
@@ -99,13 +102,13 @@ All atoms enforce:
 
  - explicit handovers between stages
 
-4. Composability
+### 4. Composability
 
 Atoms are small, orthogonal, and predictable.
 
 Complex primitives are built by composing them.
 
-5. Zero Trust
+### 5. Zero Trust
 
 Nothing is assumed.
 Nothing is implicit.
